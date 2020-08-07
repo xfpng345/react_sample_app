@@ -5,6 +5,7 @@ import App from '../bundles/HelloWorld/components/App';
 import SampleComponent from '../bundles/HelloWorld/components/SampleComponent';
 import FirstComponent from '../bundles/User/components/FirstComponent';
 import IndexComponent from '../bundles/User/components/IndexComponent';
+import CreateComponent from '../bundles/User/components/CreateComponent';
 
 
 // This is how react_on_rails can see the HelloWorld in the browser.
@@ -14,4 +15,5 @@ ReactOnRails.register({
   SampleComponent,
   FirstComponent,
   IndexComponent,
+  CreateComponent,
 });

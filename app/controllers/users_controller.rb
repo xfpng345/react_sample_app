@@ -4,25 +4,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-    @usersj = @users.as_json
+    @users = User.all.as_json
   end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-    @userj = User.new(user_params).as_json
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    @user = User.create(user_params)
+    render json: @user
   end
 
   # PATCH/PUT /users/1

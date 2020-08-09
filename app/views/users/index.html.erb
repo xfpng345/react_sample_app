@@ -1,27 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Users</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Post</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.post %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <%= react_component("FirstComponent", prender: false) %>
-<%= react_component("IndexComponent", props: { users: @usersj }, prerender: false) %>
+<%= react_component("IndexComponent", props: { users: @users }, prerender: false) %>
 <%= react_component("CreateComponent", prerender: false) %>

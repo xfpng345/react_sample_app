@@ -4,24 +4,47 @@ class CreateComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: ''
+      name: '',
+      post: ''
     }
   }
 
-  onChangetxet(e) {
-    this.setState({product: e.target.value})
+  handleinputChange = (event) => {
+    this.setState({[event.target.name]:event.target.value})
   }
+
+  createPostRequest = (event) => {
+    console.log('this.state', this.state);
+    fetch('http://localhost:3000/users', {
+      method: 'post',
+      body: JSON.stringify(this.state),
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+    })
+    .then( this.fetchTasks )
+  }
+
   render() {
+    const {name,post} = this.state;
     return (
       <div>
         <p>Hi this is the create form</p><br />
-        <form>
-          <p>name</p>
-          <input />
-          <p>post</p>
-          <textarea/>
-          <input type='submit' value='作成'/>
-        </form>
+        <p>name</p>
+        <input 
+        type='text'
+        name='name'
+        value={name}
+        onChange={this.handleinputChange
+        }/>
+        <p>post</p>
+        <input 
+        type=''
+        name='post' 
+        value={post}
+        onChange={this.handleinputChange}
+        />
+        <button onClick={this.createPostRequest}>post</button>
       </div>
     );
   };

@@ -2,14 +2,26 @@ import React, { Component } from "react"
 class IndexComponent extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      users: []
+    }
+  }
+
+  componentDidMount(){
+    this.fetchTasks()
+  }
+
+  fetchTasks(){
+    fetch("http://localhost:3000/users")
+    const users = this.props.users;
+    this.setState({users: users})
   }
 
   render () {
-    const users = this.props.users;
     return (
       <div>
         <ul>
-          {users.map((user) => {
+          {this.state.users.map((user) => {
             return (
               <li key={user.id}>
                 <span>{user.name}:::::</span>

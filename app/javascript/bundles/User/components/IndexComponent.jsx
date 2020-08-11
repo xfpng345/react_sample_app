@@ -1,27 +1,27 @@
 import React, { Component } from "react"
 class IndexComponent extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      users: []
-    }
-  }
+  // constructor(props){
+  //   super(props)
+  //   this.state = {
+  //     users: []
+  //   }
+  // }
 
-  componentDidMount(){
-    this.fetchTasks()
-  }
+  // componentDidMount(){
+  //   this.fetchTasks()
+  // }
 
-  fetchTasks(){
-    fetch("http://localhost:3000/users")
-    const users = this.props.users;
-    this.setState({users: users})
-  }
+  // fetchTasks(){
+  //   fetch("http://localhost:3000/users")
+  //   this.setState({users: this.props.users})
+  //   console.log('hello')
+  // }
 
   render () {
     return (
       <div>
         <ul>
-          {this.state.users.map((user) => {
+          {this.props.users.map((user) => {
             return (
               <li key={user.id}>
                 <span>{user.name}:::::</span>

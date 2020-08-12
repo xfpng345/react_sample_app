@@ -1,37 +1,53 @@
 import React, { Component } from "react"
-class IndexComponent extends Component {
-  // constructor(props){
-  //   super(props)
-  //   this.state = {
-  //     users: []
-  //   }
-  // }
+class IndexComponent extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      error: null,
+      isLoaded: false,
+      users: []
+    }
+  }
 
-  // componentDidMount(){
-  //   this.fetchTasks()
-  // }
+  componentDidMount() {
+    fetch("http://localhost:3000/users/")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            users: result
+          });
+        },
+        // 補足：コンポーネント内のバグによる例外を隠蔽しないためにも
+        // catch()ブロックの代わりにここでエラーハンドリングすることが重要です
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
 
-  // fetchTasks(){
-  //   fetch("http://localhost:3000/users")
-  //   this.setState({users: this.props.users})
-  //   console.log('hello')
-  // }
-
-  render () {
-    return (
-      <div>
+  render() {
+    const { error, isLoaded, users } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
         <ul>
-          {this.props.users.map((user) => {
-            return (
-              <li key={user.id}>
-                <span>{user.name}:::::</span>
-                <span>{user.post}</span>
-              </li>
-            );
-          })}
+          {users.map(user => (
+            <li key={user.id}>
+              {user.name} {user.post}
+            </li>
+          ))}
         </ul>
-      </div>
-    );
+      );
+    }
   }
 }
+
 export default IndexComponent;

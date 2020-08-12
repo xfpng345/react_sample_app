@@ -21,7 +21,6 @@ class IndexComponent extends Component {
         'Content-Type': 'application/json'
       },
     })
-    // console.log(this.state)
     .then(this.fetchIndex())
   }
 
@@ -29,7 +28,7 @@ class IndexComponent extends Component {
     this.fetchIndex()
   }
 
-  fetchIndex(){
+  fetchIndex= () => {
     fetch("http://localhost:3000/users") // データを取得しに行く
     .then( res => res.json() ) // json型のレスポンスをオブジェクトに変換する
     .then( res => { // オブジェクトに変換したレスポンスを受け取り、
@@ -62,7 +61,7 @@ class IndexComponent extends Component {
             value={post}
             onChange={this.handleinputChange}
           />
-          <button  value="post" onClick={this.createPostRequest}>post</button>
+          <button id="submit" onClick={this.createPostRequest}>submit</button>
         </div>
       );
   }

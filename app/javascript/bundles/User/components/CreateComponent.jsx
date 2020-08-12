@@ -7,10 +7,32 @@ class CreateComponent extends Component {
       name: '',
       post: ''
     }
+    this.fetchTask=this.fetchTask.bind(this)
   }
 
   handleinputChange = (event) => {
     this.setState({[event.target.name]:event.target.value})
+  }
+
+  fetchTask() {
+    fetch("http://localhost:3000/users/")
+    .then(res => res.json())
+    .then(
+      (result) => {
+        this.setState({
+          isLoaded: true,
+          users: result
+        });
+      },
+      // 補足：コンポーネント内のバグによる例外を隠蔽しないためにも
+      // catch()ブロックの代わりにここでエラーハンドリングすることが重要です
+      (error) => {
+        this.setState({
+          isLoaded: true,
+          error
+        });
+      }
+    )
   }
 
   createPostRequest = (event) => {
@@ -22,7 +44,7 @@ class CreateComponent extends Component {
         'Content-Type': 'application/json'
       },
     })
-    .then( this.fetchTasks )
+    .then(this.fetchTask)
   }
 
   render() {

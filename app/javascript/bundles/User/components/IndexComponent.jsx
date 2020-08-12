@@ -21,7 +21,7 @@ class IndexComponent extends Component {
         'Content-Type': 'application/json'
       },
     })
-    .then(this.fetchIndex())
+    .then(() => this.fetchIndex())
   }
 
   componentDidMount() {

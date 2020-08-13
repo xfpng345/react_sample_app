@@ -33,5 +33,14 @@ module ReactSampleApp
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.i18n.available_locales = [:en, :ja]
     config.time_zone = "Tokyo"
+
+    config.generators do |g|
+      g.assets false
+      g.test_framework false
+      g.javascripts false
+      g.template_engine :erb
+      g.helper false
+
+    end
   end
 end

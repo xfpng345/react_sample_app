@@ -1,5 +1,6 @@
-import React, { Component } from "react"
-class IndexComponent extends Component {
+import React from "react"
+import DeleteComponent from './DeleteComponent';
+class IndexComponent extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -35,13 +36,6 @@ class IndexComponent extends Component {
     .then(() => this.fetchIndex())
   }
 
-  deleteUser(userId){
-    fetch('http://localhost:3000/users/'+userId, {
-      method: 'delete',
-    })
-    .then(() => this.fetchIndex())
-  }
-
   componentDidMount() {
     this.fetchIndex()
   }
@@ -63,7 +57,7 @@ class IndexComponent extends Component {
               <li key={user.id}>
                 {user.id} {user.name} {user.post}
                 <button onClick={ ()=>{ this.putUser(user.id) } }>put</button>
-                <button onClick={ ()=>{ this.deleteUser(user.id) } }>delete</button>
+                <DeleteComponent UserId={user.id}  fetch={() => this.fetchIndex()}/>
               </li>
             ))}
           </ul>

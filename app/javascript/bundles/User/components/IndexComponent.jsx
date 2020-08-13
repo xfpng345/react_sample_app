@@ -24,6 +24,24 @@ class IndexComponent extends Component {
     .then(() => this.fetchIndex())
   }
 
+  putUser(userId){
+    fetch('http://localhost:3000/users/'+userId, {
+      method: 'put',
+      body: JSON.stringify({name:'更新'}),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(() => this.fetchIndex())
+  }
+
+  deleteUser(userId){
+    fetch('http://localhost:3000/users/'+userId, {
+      method: 'delete',
+    })
+    .then(() => this.fetchIndex())
+  }
+
   componentDidMount() {
     this.fetchIndex()
   }
@@ -44,6 +62,8 @@ class IndexComponent extends Component {
             {users.map(user => (
               <li key={user.id}>
                 {user.id} {user.name} {user.post}
+                <button onClick={ ()=>{ this.putUser(user.id) } }>put</button>
+                <button onClick={ ()=>{ this.deleteUser(user.id) } }>delete</button>
               </li>
             ))}
           </ul>

@@ -48,16 +48,16 @@ class IndexComponent extends Component {
             ))}
           </ul>
           <p>name</p>
-          <input 
+          <input
             type='text'
             name='name'
             value={name}
             onChange={this.handleinputChange}
           />
           <p>post</p>
-          <input 
+          <input
             type='text'
-            name='post' 
+            name='post'
             value={post}
             onChange={this.handleinputChange}
           />
